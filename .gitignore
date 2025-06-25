@@ -1,0 +1,27 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Streamlit config
+.streamlit/
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database or secrets (just in case)
+*.db
+*.env
+
+# Node (if you used any JS tools)
+node_modules/
