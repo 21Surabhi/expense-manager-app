@@ -1,25 +1,34 @@
-# Demo: `streamlit hello` as a native multipage app
+# Expense Manager App
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/streamlit/docs/main/python/api-examples-source/mpa-hello/Hello.py)
+A simple and interactive web application to track and manage personal expenses, built using Python, Streamlit, and MongoDB.
 
-This project highlights Streamlit's new multipage app functionality. 
+This project was created as a hands-on learning experience, with the help of AI tools like ChatGPT. It helped me understand how to build a dynamic web app that accepts user input, stores data in a database, and displays filtered results.
 
-![In-use Animation](https://github.com/streamlit/hello/blob/main/mpa-hero.gif?raw=true "In-use Animation")
+---
 
+## Features
 
-## How to run this demo
-The demo can be accessed via Streamlit Community Cloud [here](https://share.streamlit.io/streamlit/docs/main/python/api-examples-source/mpa-hello/Hello.py) or locally via the following steps:
+- Add expense entries with category, amount, and date
+- View all past expenses in a clean table
+- Filter expenses by date or category
+- Display all expenses less than ₹200
+- Stores and retrieves data from a MongoDB database
+- Built using Streamlit for a responsive UI
 
-```
-pip install streamlit
-streamlit hello
-```
+---
 
-## Learn more 
+## Tech Stack
 
-- [Documentation](https://docs.streamlit.io/library/get-started/multipage-apps)
-- [Blog post](https://blog.streamlit.io/introducing-multipage-apps/)
+- **Frontend & Logic**: Python, Streamlit
+- **Database**: MongoDB (via `pymongo`)
+- **Libraries Used**: `streamlit`, `pymongo`, `datetime`
 
-## Questions? Comments?
+---
 
-Please ask in the [community forum](https://discuss.streamlit.io).
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/21Surabhi/expense-manager-app.git
+   cd expense-manager-app
+   ```
