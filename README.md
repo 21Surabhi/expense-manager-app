@@ -11,7 +11,6 @@ This project was created as a hands-on learning experience, with the help of AI 
 - Add expense entries with category, amount, and date
 - View all past expenses in a clean table
 - Filter expenses by date or category
-- Display all expenses less than ₹200
 - Stores and retrieves data from a MongoDB database
 - Built using Streamlit for a responsive UI
 
