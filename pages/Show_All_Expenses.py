@@ -1,27 +1,11 @@
 import streamlit as st
-import pymongo
-import pandas as pd
-from datetime import datetime
+from UI_components import load_expenses_into_dataframe, display_expenses_with_edit
+from db_mongo import 
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["expense_manager"]
-collection = db["expenses"]
+df = load_expenses_into_dataframe()
 
-def display_expenses():
-    st.title("All Expenses")
+if df.empty:
+    st.info("No expenses found.")
+    st.stop()
 
-    expenses = list(collection.find())
-
-    if not expenses:
-        st.info("No expenses found.")
-        return
-
-    for exp in expenses:
-        exp["_id"] = str(exp["_id"])
-        if exp.get("date") and not isinstance(exp["date"], str):
-            exp["date"] = exp["date"].strftime("%Y-%m-%d")
-
-    df = pd.DataFrame(expenses)
-    st.dataframe(df, use_container_width=True)
-
-display_expenses()
+display_expenses_with_edit(df)
