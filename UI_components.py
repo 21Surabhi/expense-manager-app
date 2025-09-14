@@ -203,7 +203,7 @@ def show_expenses_less_than_1000(result_df):
 
 
 
-
+"""
 import streamlit as st
 import pandas as pd
 from datetime import datetime
@@ -282,4 +282,6 @@ def display_expenses_table(expenses):
 
     st.subheader("All Expenses")
     st.dataframe(df, use_container_width=True)
+"""
+
     

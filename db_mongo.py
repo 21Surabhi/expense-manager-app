@@ -47,3 +47,11 @@ def input_budgets():
         {"category": "Shopping", "budget": 2400},
         {"category": "Transport", "budget": 1600}
     ])
+
+def update_budget(category, new_budget):
+    db = get_db()
+    result = db["budgets"].update_one(
+        {"category": category},
+        {"$set": {"budget": new_budget}}
+    )
+    return result.modified_count

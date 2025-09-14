@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-from db_mysql import (
+from db_mongo import (
     get_all_expenses,
     get_all_budgets,
     update_budget,
@@ -17,31 +17,25 @@ from UI_components import (
 
 st.title("Set Monthly Budget per Category")
 
-
 expenses = get_all_expenses()
 budgets_list = get_all_budgets()
 categories = sorted({e.get("category", "Uncategorized").strip() for e in expenses})
-
 if not categories:
     st.info("No expense categories found.")
     st.stop()
 
-
 existing_budgets = {b["category"]: b["budget"] for b in budgets_list}
 updated_budgets = show_budget_inputs(categories, existing_budgets)
-
 
 if st.button("Save Budgets"):
     try:
         for category, budget in updated_budgets.items():
-            update_budget(category, budget)  
+            update_budget(category, budget)
         st.success("Budgets saved successfully.")
     except Exception as e:
         st.error(f"Failed to save budgets: {e}")
 
-
 st.title("Monthly Budget vs Spent per Category")
-
 if not expenses:
     st.info("No expense data found.")
     st.stop()
@@ -57,11 +51,7 @@ for exp in expenses:
         elif not isinstance(date, datetime):
             continue
         month = datetime(date.year, date.month, 1)
-        data.append({
-            "Amount": amount,
-            "Category": category,
-            "Month": month
-        })
+        data.append({"Amount": amount, "Category": category, "Month": month})
     except:
         continue
 
@@ -73,10 +63,8 @@ df_grouped["Budget"] = df_grouped["Category"].apply(lambda x: existing_budgets.g
 months = df_grouped["Month"].drop_duplicates().sort_values()
 show_monthly_budget_vs_spent(months, df_grouped)
 
-
 expenses_1000 = expenses_less_than_1000()
-
-cleaned = []
+cleaned_1000 = []
 for exp in expenses_1000:
     try:
         amount = float(exp.get("amount", 0))
@@ -86,42 +74,40 @@ for exp in expenses_1000:
             date = datetime.strptime(date.strip(), "%Y-%m-%d")
         elif not isinstance(date, datetime):
             continue
-        cleaned.append({
+        cleaned_1000.append({
             "Date": date.strftime("%Y-%m-%d"),
             "Category": category,
-            "Amount": amount,
+            "Amount": amount
         })
     except:
         continue
 
-df_1000 = pd.DataFrame(cleaned)
-if df_1000.empty:
-    st.info("No expenses under 1000 found.")
-else:
+df_1000 = pd.DataFrame(cleaned_1000)
+if not df_1000.empty:
     show_expenses_less_than_1000(df_1000)
-
+else:
+    st.info("No expenses under 1000 found.")
 
 expenses_200 = expenses_less_than_200()
-
-small_expenses = []
+cleaned_200 = []
 for exp in expenses_200:
     try:
-        amount = float(exp.get("amount", 0)) 
+        amount = float(exp.get("amount", 0))
         category = exp.get("category", "Uncategorized").strip()
         date = exp.get("date")
         if isinstance(date, str):
             date = datetime.strptime(date.strip(), "%Y-%m-%d")
         elif not isinstance(date, datetime):
             continue
-        small_expenses.append({
+        cleaned_200.append({
             "Date": date.strftime("%Y-%m-%d"),
             "Category": category,
-            "Amount": amount,
+            "Amount": amount
         })
     except:
         continue
 
-df_200 = pd.DataFrame(small_expenses)
+df_200 = pd.DataFrame(cleaned_200)
 if not df_200.empty:
     show_expenses_less_than_200(df_200)
 else:
