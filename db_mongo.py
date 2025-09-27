@@ -3,7 +3,7 @@ from bson import ObjectId
 from datetime import datetime
 
 def get_db():
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    client = pymongo.MongoClient("mongodb+srv://surabhihegde21:GRixrjhlFMBMRexT@cluster0.rl4aqdh.mongodb.net/")
     return client["expense_manager"]
 
 def add_expenses(expenses):
@@ -55,3 +55,8 @@ def update_budget(category, new_budget):
         {"$set": {"budget": new_budget}}
     )
     return result.modified_count
+
+
+
+
+
