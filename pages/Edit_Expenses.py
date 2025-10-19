@@ -21,4 +21,4 @@ edit_expense_form(exp, categories, exp_id)
 
 if st.button("Back"):
     del st.session_state["selected_expense_id"]
-    st.switch_page("pages/Display_Expenses.py")
+    st.switch_page("Display Expenses.py")

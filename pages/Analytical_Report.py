@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime
 
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb+srv://surabhihegde21:GRixrjhlFMBMRexT@cluster0.rl4aqdh.mongodb.net/")
 db = client["expense_manager"]
 collection = db["expenses"]
 

@@ -3,7 +3,7 @@ from bson import ObjectId
 from datetime import datetime
 
 def get_db():
-    client = pymongo.MongoClient("mongodb+srv://surabhihegde21:GRixrjhlFMBMRexT@cluster0.rl4aqdh.mongodb.net/")
+    client = pymongo.MongoClient("mongodb+srv://surabhihegde21:GRixrjhlFMBMRexT@cluster0.rl4aqdh.mongodb.net/expense_manager?retryWrites=true&w=majority")
     return client["expense_manager"]
 
 def add_expenses(expenses):
